@@ -1,0 +1,692 @@
+/* ==========================================================================
+   AHMED AHMED — PORTFOLIO
+   Design system: ORYZO AI — "Darkroom product editorial"
+
+   Contents
+     01  Tokens
+     02  Reset & base
+     03  Fixed chrome (nav, sidebar label)
+     04  Section shell
+     05  Reveal grid (the signature three-column pattern)
+     06  Typography components
+     07  Buttons
+     08  Cards & surfaces
+     09  Image frames + missing-state placeholders
+     10  Hero
+     11  Contact & footer
+     12  Responsive
+   ========================================================================== */
+
+
+/* 01  TOKENS ============================================================== */
+
+:root {
+  /* Colors — the whole palette, nothing else is permitted */
+  --color-warm-cream:    #ffedd7;
+  --color-walnut-shadow: #100904;
+  --color-bark-brown:    #382416;
+  --color-cork-border:   #40372e;
+  --color-driftwood:     #6c5f51;
+  --color-ember-accent:  #dc5000;
+
+  /* Surfaces — depth comes from this two-step stack, never from shadow */
+  --surface-0: var(--color-walnut-shadow);  /* page canvas          */
+  --surface-1: var(--color-bark-brown);     /* the one elevated fill */
+
+  /* Type families.
+     Spec calls for 'halyard-display-variable' (Adobe Fonts, needs a paid kit),
+     and names Inter as the substitute. */
+  --font-display: 'Inter', ui-sans-serif, system-ui, -apple-system,
+                  BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-arial:   Arial, ui-sans-serif, system-ui, sans-serif;
+
+  /* Type scale — fluid, reaching the exact spec value at 1200px and holding.
+     Below 1200px it scales down so full-viewport sections never clip. */
+  --text-display:     clamp(2.25rem,   0.583rem + 3.472vw, 3.1875rem);  /* →51px */
+  --text-heading:     clamp(1.8125rem, 0.479rem + 2.778vw, 2.5625rem);  /* →41px */
+  --text-body:        clamp(1.25rem,   0.25rem  + 2.083vw, 1.8125rem);  /* →29px */
+  --text-heading-sm:  clamp(1.125rem,  0.458rem + 1.389vw, 1.5rem);     /* →24px */
+  --text-subheading:  clamp(0.9375rem, 0.604rem + 0.694vw, 1.125rem);   /* →18px */
+  --text-note: clamp(0.8125rem, 0.75rem + 0.28vw, 0.9375rem);  /* 13 → 15px */
+  --text-15:  0.9375rem;
+  --text-14:  0.875rem;
+  --text-12:  0.75rem;
+  --text-10:  0.625rem;
+  --text-8:   0.5rem;
+
+  /* Wordmark — spec permits "51px+" for the hero lockup */
+  --text-wordmark: clamp(3rem, 10.5vw, 10rem);
+
+  /* Line heights — tightening as size grows is the system's signature */
+  --leading-display:    0.9;
+  --leading-heading:    0.9;
+  --leading-body:       1.26;
+  --leading-heading-sm: 1.09;
+  --leading-subheading: 1;
+  --leading-caption:    1.2;
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+
+  /* Spacing */
+  --spacing-6:   6px;   --spacing-8:   8px;   --spacing-9:   9px;
+  --spacing-10: 10px;   --spacing-12: 12px;   --spacing-14: 14px;
+  --spacing-18: 18px;   --spacing-24: 24px;   --spacing-31: 31px;
+  --spacing-41: 41px;   --spacing-45: 45px;   --spacing-68: 68px;
+
+  --card-padding: var(--spacing-24);
+  --element-gap:  var(--spacing-18);
+
+  /* Radius — these four values are the entire vocabulary */
+  --radius-cards:            12px;
+  --radius-buttons-outlined: 22.5px;
+  --radius-buttons-pill:     36px;
+  --radius-inputs:           0px;
+
+  /* Layout */
+  --gutter-x:  var(--spacing-45);
+  --rail:      var(--spacing-41);  /* clearance for the vertical edge label */
+  --nav-h:     72px;
+}
+
+
+/* 02  RESET & BASE ======================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--surface-0);
+  color: var(--color-warm-cream);
+  font-family: var(--font-display);
+  font-weight: var(--weight-medium);
+  font-feature-settings: 'ss01' 1;
+  font-synthesis-weight: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, p, figure, blockquote, ul, ol { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+img { max-width: 100%; display: block; }
+
+/* Uppercase weight-500 is the default voice for the entire interface.
+   Mixed case is reserved for .body and .notes — see section 06.
+   .frame__path is the one hard exception: it prints a literal filename, and
+   uppercasing it would name a file that doesn't exist. */
+h1, h2, h3, h4, nav, button, label, a,
+.u-label, .section__index, .meta, .marker__co, .marker__date,
+.tags, .contact__key, .credit, .hero__tagline, .frame__spec {
+  text-transform: uppercase;
+}
+
+a { color: inherit; text-decoration: none; }
+
+::selection {
+  background: var(--color-warm-cream);
+  color: var(--color-walnut-shadow);
+}
+
+:focus-visible {
+  outline: 1px solid var(--color-warm-cream);
+  outline-offset: 3px;
+}
+
+/* Hairline dashed dividers — never solid, never thicker than 1px */
+.rule {
+  height: 0;
+  border: 0;
+  border-top: 1px dashed var(--color-cork-border);
+  width: 100%;
+}
+.rule--muted { border-top-color: var(--color-driftwood); }
+
+
+/* 03  FIXED CHROME ======================================================== */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter-x);
+  background: transparent;
+  pointer-events: none;   /* let the page scroll through the empty middle */
+}
+.nav > * { pointer-events: auto; }
+
+.nav__mark {
+  font-size: var(--text-14);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--spacing-24);
+}
+
+.nav__link {
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  padding-bottom: var(--spacing-6);
+  border-bottom: 1px dashed transparent;
+}
+.nav__link:hover,
+.nav__link[aria-current='true'] {
+  border-bottom-color: var(--color-cork-border);
+}
+
+/* Edge branding — a serial number borrowed from physical product design.
+   writing-mode rather than rotate(90deg): a rotated element keeps its original
+   wide box, so `right` would anchor the pre-rotation edge and the label would
+   land ~130px inboard, on top of the body column. Vertical writing-mode gives
+   a genuinely narrow box that sits inside the --rail clearance. */
+.edge-label {
+  position: fixed;
+  top: 50%;
+  right: var(--spacing-12);
+  z-index: 90;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  white-space: nowrap;
+  font-size: var(--text-10);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--color-driftwood);
+  pointer-events: none;
+}
+
+
+/* 04  SECTION SHELL ======================================================= */
+
+.section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--nav-h) + var(--spacing-31)) var(--rail)
+           var(--spacing-45) var(--gutter-x);
+}
+
+/* Every section after the hero is introduced by a dashed hairline */
+.section + .section { border-top: 1px dashed var(--color-cork-border); }
+
+.section__index {
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--color-driftwood);
+  margin-bottom: var(--spacing-18);
+}
+
+
+/* 05  REVEAL GRID ========================================================= */
+/* text / object / text — the signature three-column pattern */
+
+/* The centred object holds ~34vw. The spec suggests 40%, but at 40% the two
+   flanking text columns wrap so hard that the section overruns its viewport —
+   and a section that overflows breaks the one-screen-per-statement rule that
+   matters more. */
+.reveal {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 34vw) 1fr;
+  gap: var(--element-gap);
+  align-items: center;
+  width: 100%;
+}
+
+.reveal__lead  { grid-column: 1; }
+.reveal__object{ grid-column: 2; }
+.reveal__aside { grid-column: 3; }
+
+/* Headings and body are always left-aligned, even flanking a centred object */
+.reveal__lead, .reveal__aside { text-align: left; }
+
+
+/* 06  TYPOGRAPHY COMPONENTS =============================================== */
+
+.display {
+  font-size: var(--text-display);
+  line-height: var(--leading-display);
+  font-weight: var(--weight-medium);
+}
+
+.heading {
+  font-size: var(--text-heading);
+  line-height: var(--leading-heading);
+  font-weight: var(--weight-medium);
+}
+
+.heading-sm {
+  font-size: var(--text-heading-sm);
+  line-height: var(--leading-heading-sm);
+  font-weight: var(--weight-medium);
+}
+
+.subheading {
+  font-size: var(--text-subheading);
+  line-height: var(--leading-subheading);
+  font-weight: var(--weight-medium);
+}
+
+/* The system's only conversational voice: 29px / 400 / mixed case */
+.body {
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-weight: var(--weight-regular);
+  text-transform: none;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+.u-label {
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--color-driftwood);
+}
+.u-label--cream { color: var(--color-warm-cream); }
+
+.meta {
+  font-size: var(--text-14);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-caption);
+}
+
+/* Ember accent — occurrence 1 of 2. Editorial credit only, never a control. */
+.tag-current { color: var(--color-ember-accent); }
+
+/* Supporting detail, divided by hairlines.
+   These stay MIXED CASE rather than becoming uppercase labels. The system
+   reserves mixed case for its 29px descriptive voice, and that is exactly what
+   these are — description, not labels. Uppercase paragraphs of this length are
+   unreadable, and 29px would overflow a full-viewport section. So the case is
+   preserved and the size flexes down one step instead. */
+.notes { margin-top: var(--spacing-18); }
+.notes > li {
+  padding: var(--spacing-10) 0;
+  font-size: var(--text-note);
+  line-height: 1.4;
+  font-weight: var(--weight-regular);
+  text-transform: none;
+  color: var(--color-warm-cream);
+  text-wrap: pretty;
+}
+.notes > li + li { border-top: 1px dashed var(--color-cork-border); }
+
+.stack   { display: flex; flex-direction: column; gap: var(--element-gap); }
+.stack--tight { gap: var(--spacing-12); }
+.stack--wide  { gap: var(--spacing-24); }
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-8) var(--spacing-12);
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--color-driftwood);
+}
+.tags li::after { content: ' ·'; }
+.tags li:last-child::after { content: ''; }
+
+
+/* 07  BUTTONS ============================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-warm-cream);
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease;
+}
+
+/* The single filled surface. One per section, maximum. */
+.btn--pill {
+  border-radius: var(--radius-buttons-pill);
+  background: var(--surface-1);
+  padding: var(--spacing-14) var(--spacing-24);
+}
+.btn--pill:hover {
+  background: var(--color-warm-cream);
+  color: var(--color-walnut-shadow);
+}
+
+/* Border does the work; no fill needed. */
+.btn--ghost {
+  border-radius: var(--radius-buttons-outlined);
+  border-color: var(--color-warm-cream);
+  padding: 7.5px var(--spacing-24);
+}
+.btn--ghost:hover {
+  background: var(--color-warm-cream);
+  color: var(--color-walnut-shadow);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+/* Inline link — no container, just an underline indicator */
+.link {
+  border-radius: var(--radius-inputs);
+  font-size: var(--text-14);
+  font-weight: var(--weight-medium);
+  border-bottom: 1px solid var(--color-cork-border);
+  padding-bottom: 2px;
+  transition: border-color .25s ease;
+}
+.link:hover { border-bottom-color: var(--color-warm-cream); }
+
+
+/* 08  CARDS & SURFACES ==================================================== */
+
+/* The one elevated solid — depth from the surface step, not from blur */
+.card {
+  border-radius: var(--radius-cards);
+  background: var(--surface-1);
+  padding: var(--card-padding);
+}
+
+.card--outline {
+  border-radius: var(--radius-cards);
+  background: transparent;
+  border: 1px solid var(--color-cork-border);
+  padding: var(--card-padding);
+}
+
+/* Role marker: company + dates, sitting where a product render would */
+.marker {
+  border-radius: var(--radius-cards);
+  background: var(--surface-1);
+  padding: var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-18);
+  text-align: left;
+}
+.marker__co   { font-size: var(--text-heading-sm); line-height: var(--leading-heading-sm); }
+.marker__date { font-size: var(--text-14); line-height: var(--leading-caption); }
+
+
+/* 09  IMAGE FRAMES ======================================================== */
+
+.frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--surface-0);
+}
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.frame--3x2 { aspect-ratio: 3 / 2; }
+.frame--1x1 { aspect-ratio: 1 / 1; }
+
+/* Missing state: a labelled slot naming the exact file to drop in.
+   Add the file and this disappears on its own — no code change. */
+.frame.is-missing {
+  border: 1px dashed var(--color-cork-border);
+  border-radius: var(--radius-cards);
+  background: color-mix(in srgb, var(--surface-1) 22%, transparent);
+}
+.frame.is-missing img { display: none; }
+
+.frame__slot {
+  display: none;
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-18);
+  text-align: center;
+}
+.frame.is-missing .frame__slot { display: flex; }
+
+.frame__path {
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-caption);
+  color: var(--color-warm-cream);
+  word-break: break-word;
+}
+.frame__spec {
+  font-size: var(--text-10);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-caption);
+  color: var(--color-driftwood);
+}
+
+/* Secondary detail shot — the one place an image is treated as a card */
+.thumb {
+  width: clamp(84px, 9vw, 132px);
+  border-radius: var(--radius-cards);
+  overflow: hidden;
+  margin-top: var(--spacing-12);
+  margin-left: auto;   /* tucks into the lower-right of the object column */
+}
+.thumb .frame.is-missing .frame__spec { display: none; }
+.thumb .frame__path { font-size: var(--text-10); }
+
+
+/* 10  HERO ================================================================ */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: calc(var(--nav-h) + var(--spacing-31)) var(--rail)
+           var(--spacing-45) var(--gutter-x);
+  overflow: hidden;
+}
+
+.hero__bg { position: absolute; inset: 0; z-index: 0; }
+.hero__bg img { width: 100%; height: 100%; object-fit: cover; }
+/* Grading pass so cream type holds against any photograph */
+.hero__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top,   var(--color-walnut-shadow) 0%,
+                              color-mix(in srgb, var(--color-walnut-shadow) 30%, transparent) 55%),
+    linear-gradient(to right, color-mix(in srgb, var(--color-walnut-shadow) 78%, transparent) 0%,
+                              transparent 70%);
+}
+/* No photograph yet → pure void mode, which reads as intentional */
+.hero__bg.is-missing { display: none; }
+
+.hero__top,
+.hero__bottom { position: relative; z-index: 1; }
+
+.hero__bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-41);
+  flex-wrap: wrap;
+}
+
+.hero__tagline {
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  margin-bottom: var(--spacing-18);
+}
+
+.wordmark {
+  font-size: var(--text-wordmark);
+  line-height: var(--leading-display);
+  font-weight: var(--weight-medium);
+  text-transform: uppercase;
+}
+
+.hero__card {
+  border-radius: var(--radius-cards);
+  padding: var(--card-padding);
+  background: color-mix(in srgb, var(--surface-1) 55%, transparent);
+  border: 1px solid var(--color-cork-border);
+  max-width: 46ch;
+  backdrop-filter: blur(2px);
+}
+.hero__card .body { font-size: var(--text-subheading); text-transform: none; font-weight: var(--weight-regular); }
+
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-12);
+}
+
+.hero__hint {
+  font-size: var(--text-10);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-caption);
+  color: var(--color-driftwood);
+}
+.hero__hint[hidden] { display: none; }
+
+
+/* 11  CONTACT & FOOTER ==================================================== */
+
+.contact__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: var(--spacing-24);
+}
+/* Key/value pairs share one left edge — the system never right-aligns copy */
+.contact__row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  align-items: baseline;
+  gap: var(--spacing-18);
+  padding: var(--spacing-14) 0;
+  border-top: 1px dashed var(--color-cork-border);
+}
+.contact__row > * { justify-self: start; }
+.contact__row:last-child { border-bottom: 1px dashed var(--color-cork-border); }
+.contact__key   { font-size: var(--text-12); color: var(--color-driftwood); }
+.contact__value { font-size: var(--text-subheading); }
+
+.footer {
+  margin-top: var(--spacing-41);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+  flex-wrap: wrap;
+}
+
+/* Ember accent — occurrence 2 of 2. The credit line. */
+.credit {
+  font-size: var(--text-12);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  color: var(--color-ember-accent);
+}
+
+/* Intentionally a different typeface: this is compliance, not design */
+.legal {
+  font-family: var(--font-arial);
+  font-size: var(--text-8);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-caption);
+  text-transform: uppercase;
+  color: var(--color-driftwood);
+}
+
+
+/* 12  RESPONSIVE ========================================================== */
+
+/* Tablet — keep the three columns but relax the object and the gutters */
+@media (max-width: 1199px) {
+  :root {
+    --gutter-x: var(--spacing-31);
+    --rail:     var(--spacing-31);
+  }
+  .reveal { grid-template-columns: 1fr minmax(0, 30vw) 1fr; }
+}
+
+/* Below 900px the three-column reveal stops working — stack it. */
+@media (max-width: 899px) {
+  :root {
+    --gutter-x: var(--spacing-24);
+    --rail:     var(--spacing-24);
+    --nav-h:    64px;
+  }
+
+  .edge-label { display: none; }
+
+  .section,
+  .hero {
+    min-height: 100svh;
+    padding-top: calc(var(--nav-h) + var(--spacing-31));
+    padding-bottom: var(--spacing-45);
+  }
+
+  .reveal {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-24);
+  }
+  .reveal__lead, .reveal__object, .reveal__aside { grid-column: 1; }
+
+  /* Object sits between the heading and the description */
+  .reveal__lead   { order: 1; }
+  .reveal__object { order: 2; }
+  .reveal__aside  { order: 3; }
+
+  .thumb { margin-left: 0; }
+
+  .hero__bottom { flex-direction: column; align-items: flex-start; }
+  .hero__actions { align-items: flex-start; }
+}
+
+@media (max-width: 599px) {
+  .nav__links { gap: var(--spacing-14); }
+  .contact__row { flex-direction: column; align-items: flex-start; gap: var(--spacing-6); }
+  .btn-row { width: 100%; }
+  .btn { flex: 1 1 auto; }
+}
+
+/* Print — collapse the void, keep the content readable on paper */
+@media print {
+  .nav, .edge-label, .frame, .thumb, .btn { display: none; }
+  body { background: #fff; color: #000; }
+  .section, .hero { min-height: 0; page-break-inside: avoid; padding: 24px 0; }
+}
