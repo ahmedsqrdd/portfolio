@@ -319,6 +319,25 @@ a { color: inherit; text-decoration: none; }
    these are — description, not labels. Uppercase paragraphs of this length are
    unreadable, and 29px would overflow a full-viewport section. So the case is
    preserved and the size flexes down one step instead. */
+/* Reflective prose — several paragraphs answering one question.
+   The system's conversational voice is .body at 29px, sized for a single
+   descriptive sentence flanking an object. A four-paragraph answer at that size
+   would run several screens, so prose steps down to the same size .notes uses
+   and takes its rhythm from paragraph gaps rather than hairlines. Mixed case,
+   like every other descriptive voice here. */
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-14);
+}
+.prose > p {
+  font-size: var(--text-note);
+  line-height: 1.5;
+  font-weight: var(--weight-regular);
+  text-transform: none;
+  text-wrap: pretty;
+}
+
 .notes { margin-top: var(--spacing-18); }
 .notes > li {
   padding: var(--spacing-10) 0;
@@ -517,16 +536,21 @@ a { color: inherit; text-decoration: none; }
 
 .hero__bg { position: absolute; inset: 0; z-index: 0; }
 .hero__bg img { width: 100%; height: 100%; object-fit: cover; }
-/* Grading pass so cream type holds against any photograph */
+/* Grading pass so cream type holds against any photograph.
+   Three layers, and all three are needed: the flat scrim is what covers the
+   top-right corner, where the nav sits over whatever the photograph happens to
+   put there. A high-key image — a bright window, a pale wall — leaves the two
+   directional gradients with nothing to darken up there. */
 .hero__bg::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
     linear-gradient(to top,   var(--color-walnut-shadow) 0%,
-                              color-mix(in srgb, var(--color-walnut-shadow) 30%, transparent) 55%),
-    linear-gradient(to right, color-mix(in srgb, var(--color-walnut-shadow) 78%, transparent) 0%,
-                              transparent 70%);
+                              color-mix(in srgb, var(--color-walnut-shadow) 45%, transparent) 60%),
+    linear-gradient(to right, color-mix(in srgb, var(--color-walnut-shadow) 88%, transparent) 0%,
+                              color-mix(in srgb, var(--color-walnut-shadow) 25%, transparent) 75%),
+    color-mix(in srgb, var(--color-walnut-shadow) 32%, transparent);
 }
 /* No photograph yet → pure void mode, which reads as intentional */
 .hero__bg.is-missing { display: none; }
@@ -653,6 +677,11 @@ a { color: inherit; text-decoration: none; }
 
   .edge-label { display: none; }
 
+  /* Six links do not fit a phone-width bar. CV and Letter drop out first —
+     both sit adjacent to a section that keeps its link, so nothing becomes
+     unreachable, only one scroll further away. */
+  .nav__link--minor { display: none; }
+
   .section,
   .hero {
     min-height: 100svh;
@@ -678,6 +707,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (max-width: 599px) {
+  /* The wordmark is the first thing in the hero anyway — at this width the
+     four remaining links need the whole bar. */
+  .nav { justify-content: flex-end; }
+  .nav__mark { display: none; }
+
   .nav__links { gap: var(--spacing-14); }
   .contact__row { flex-direction: column; align-items: flex-start; gap: var(--spacing-6); }
   .btn-row { width: 100%; }

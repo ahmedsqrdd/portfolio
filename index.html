@@ -28,9 +28,12 @@
 <nav class="nav" aria-label="Primary">
   <a class="nav__mark" href="#top">Ahmed Ahmed</a>
   <ul class="nav__links">
-    <li><a class="nav__link" href="#work"     data-nav-link="work">Work</a></li>
-    <li><a class="nav__link" href="#projects" data-nav-link="projects">Projects</a></li>
-    <li><a class="nav__link" href="#contact"  data-nav-link="contact">Contact</a></li>
+    <li><a class="nav__link nav__link--minor" href="#cv" data-nav-link="cv">CV</a></li>
+    <li><a class="nav__link" href="#work"       data-nav-link="work">Work</a></li>
+    <li><a class="nav__link" href="#projects"   data-nav-link="projects">Projects</a></li>
+    <li><a class="nav__link" href="#reflection" data-nav-link="reflection">Reflection</a></li>
+    <li><a class="nav__link nav__link--minor" href="#letter" data-nav-link="letter">Letter</a></li>
+    <li><a class="nav__link" href="#contact"    data-nav-link="contact">Contact</a></li>
   </ul>
 </nav>
 
@@ -66,6 +69,7 @@
       <div class="btn-row">
         <a class="btn btn--pill" href="assets/Ahmed-Ahmed-Resume.pdf" download>Download Resume</a>
         <a class="btn btn--ghost" href="#projects">View Projects</a>
+        <a class="btn btn--ghost" href="#contact">Get in Touch</a>
       </div>
       <p class="hero__hint" data-hero-hint hidden>◦ Optional — drop a photograph at images/hero.jpg</p>
     </div>
@@ -90,18 +94,113 @@
 
     <div class="reveal__aside">
       <p class="body">Mechanical &amp; Mechatronics Engineering student at the University of
-        Technology Sydney, with current industry experience at a Sydney engineering consultancy.
-        Strongest where engineering analysis meets software, and experienced leading a
-        multidisciplinary hardware project from schematic to validated prototype.</p>
+        Technology Sydney, currently designing hydraulic services at a Sydney consultancy.
+        Strongest where engineering analysis meets software.</p>
+
+      <div class="prose" style="margin-top: var(--spacing-18);">
+        <p>What I keep returning to is building the thing other people end up using. In practice
+          that has meant a schematic sizing tool, written after watching the same calculation done
+          by hand across project after project, which is now part of how the design team works. In
+          the lab it has meant leading a four-person hardware team from schematic to a validated
+          prototype.</p>
+
+        <p>Consulting is where I learned to notice a repeatable process and fix it. I want to apply
+          that instinct to product design, automation and embedded systems — in teams where
+          engineers are expected to improve the tools they work with, not simply operate them.</p>
+      </div>
     </div>
   </div>
 </section>
 
 
-<!-- ══ 03 · ROLE 01 ══════════════════════════════════════════════════════ -->
+<!-- ══ 03 · CURRICULUM VITAE ═════════════════════════════════════════════ -->
+
+<section class="section" id="cv" data-nav-section="cv" aria-labelledby="cv-h">
+  <p class="section__index">02 · Curriculum vitae</p>
+
+  <div class="reveal">
+    <div class="reveal__lead">
+      <div class="stack stack--tight">
+        <p class="u-label">Education</p>
+        <h2 class="heading" id="cv-h">Curriculum<br>vitae.</h2>
+        <hr class="rule" style="margin-top: var(--spacing-6);">
+        <p class="meta">Credit average · WAM 70.1</p>
+      </div>
+    </div>
+
+    <div class="reveal__object">
+      <div class="marker">
+        <p class="marker__co">University of<br>Technology Sydney</p>
+        <hr class="rule">
+        <p class="marker__date">2023 — Expected 2027</p>
+      </div>
+    </div>
+
+    <div class="reveal__aside">
+      <p class="body">Bachelor of Engineering (Honours), Mechanical &amp; Mechatronics.</p>
+
+      <ul class="notes">
+        <li><span class="u-label">High Distinction</span> — Applied Mechanics &amp; Design B;
+          Mathematics 2</li>
+        <li><span class="u-label">Distinction</span> — Sensors &amp; Control for Mechatronic
+          Systems; Thermofluids A; Designing Sustainable Engineering Projects</li>
+        <li><span class="u-label">Warman Track Challenge</span> — UTS MDFS, 2024. Designed and
+          assembled an omni-directional Arduino robot for an automated track challenge, programming
+          its motion control in C for precision calibration within a small margin for error</li>
+        <li><span class="u-label">Assistant football coach</span> — Sharara Sport, 2022. Ran
+          structured training sessions for local youth, focused on skill development and teamwork</li>
+      </ul>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 04 · CAPABILITY ═══════════════════════════════════════════════════ -->
+
+<section class="section" data-nav-section="cv" aria-labelledby="skills-h">
+  <p class="section__index">03 · Curriculum vitae</p>
+
+  <div class="reveal">
+    <div class="reveal__lead">
+      <div class="stack stack--tight">
+        <p class="u-label">Technical skills</p>
+        <h2 class="heading" id="skills-h">Capability.</h2>
+      </div>
+    </div>
+
+    <div class="reveal__object">
+      <hr class="rule rule--muted">
+    </div>
+
+    <div class="reveal__aside">
+      <p class="body">Engineering analysis and software, kept deliberately close together.</p>
+
+      <ul class="notes">
+        <li><span class="u-label">Programming</span> — Python, C, C++, JavaScript, MATLAB</li>
+        <li><span class="u-label">CAD &amp; analysis</span> — AutoCAD, SolidWorks, Revit,
+          Bluebeam, FEA</li>
+        <li><span class="u-label">Tools &amp; frameworks</span> — OpenCV, ROS, Altium Designer,
+          Next.js, Supabase, Git &amp; GitHub</li>
+        <li><span class="u-label">Engineering</span> — structural &amp; fatigue analysis,
+          thermofluids, PCB design &amp; validation, embedded firmware, computer vision,
+          closed-loop control, hydraulic design</li>
+        <li><span class="u-label">Professional</span> — technical communication, team leadership,
+          process optimisation, stakeholder engagement</li>
+      </ul>
+
+      <div class="btn-row" style="margin-top: var(--spacing-24);">
+        <a class="btn btn--pill" href="assets/Ahmed-Ahmed-Resume.pdf" download>Download Full Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 05 · ROLE 01 ══════════════════════════════════════════════════════ -->
 
 <section class="section" id="work" data-nav-section="work" aria-labelledby="role1-h">
-  <p class="section__index">02 · Experience</p>
+  <p class="section__index">04 · Experience</p>
 
   <div class="reveal">
     <div class="reveal__lead">
@@ -142,10 +241,10 @@
 </section>
 
 
-<!-- ══ 04 · ROLE 02 ══════════════════════════════════════════════════════ -->
+<!-- ══ 06 · ROLE 02 ══════════════════════════════════════════════════════ -->
 
 <section class="section" data-nav-section="work" aria-labelledby="role2-h">
-  <p class="section__index">03 · Experience</p>
+  <p class="section__index">05 · Experience</p>
 
   <div class="reveal">
     <div class="reveal__lead">
@@ -178,10 +277,10 @@
 </section>
 
 
-<!-- ══ 05 · ROLE 03 ══════════════════════════════════════════════════════ -->
+<!-- ══ 07 · ROLE 03 ══════════════════════════════════════════════════════ -->
 
 <section class="section" data-nav-section="work" aria-labelledby="role3-h">
-  <p class="section__index">04 · Experience</p>
+  <p class="section__index">06 · Experience</p>
 
   <div class="reveal">
     <div class="reveal__lead">
@@ -214,10 +313,10 @@
 </section>
 
 
-<!-- ══ 06 · PROJECT 01 ═══════════════════════════════════════════════════ -->
+<!-- ══ 08 · PROJECT 01 ═══════════════════════════════════════════════════ -->
 
 <section class="section" id="projects" data-nav-section="projects" aria-labelledby="proj1-h">
-  <p class="section__index">05 · Selected work</p>
+  <p class="section__index">07 · Selected work</p>
 
   <div class="reveal">
     <div class="reveal__lead">
@@ -273,10 +372,10 @@
 </section>
 
 
-<!-- ══ 07 · PROJECT 02 ═══════════════════════════════════════════════════ -->
+<!-- ══ 09 · PROJECT 02 ═══════════════════════════════════════════════════ -->
 
 <section class="section" data-nav-section="projects" aria-labelledby="proj2-h">
-  <p class="section__index">06 · Selected work</p>
+  <p class="section__index">08 · Selected work</p>
 
   <div class="reveal">
     <div class="reveal__lead">
@@ -331,10 +430,10 @@
 </section>
 
 
-<!-- ══ 08 · PROJECT 03 ═══════════════════════════════════════════════════ -->
+<!-- ══ 10 · PROJECT 03 ═══════════════════════════════════════════════════ -->
 
 <section class="section" data-nav-section="projects" aria-labelledby="proj3-h">
-  <p class="section__index">07 · Selected work</p>
+  <p class="section__index">09 · Selected work</p>
 
   <div class="reveal">
     <div class="reveal__lead">
@@ -386,10 +485,282 @@
 </section>
 
 
-<!-- ══ 09 · CONTACT ══════════════════════════════════════════════════════ -->
+<!-- ══ 11 · REFLECTION 01 ════════════════════════════════════════════════ -->
+
+<section class="section" id="reflection" data-nav-section="reflection" aria-labelledby="refl1-h">
+  <p class="section__index">10 · Internship reflection</p>
+
+  <div class="reveal">
+    <div class="reveal__lead">
+      <div class="stack stack--tight">
+        <p class="u-label">Question 01</p>
+        <h2 class="heading" id="refl1-h">What I<br>expected.</h2>
+      </div>
+    </div>
+
+    <div class="reveal__object">
+      <div class="card--outline">
+        <p class="u-label">The question</p>
+        <hr class="rule" style="margin: var(--spacing-14) 0;">
+        <div class="prose">
+          <p>What were your expectations about your internship before you joined?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal__aside">
+      <p class="body">I expected an undergraduate role to be mostly observational.</p>
+
+      <div class="prose" style="margin-top: var(--spacing-18);">
+        <p>I pictured myself marking up drawings, chasing redlines and learning software while the
+          real engineering happened somewhere above me. Hydraulic services, I assumed, would be a
+          narrow and rules-driven discipline: look up the standard, apply the table, move on.</p>
+
+        <p>I also expected the work to be solitary and almost entirely technical, with little
+          exposure to clients, architects or contractors until much later in my career.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 12 · REFLECTION 02 ════════════════════════════════════════════════ -->
+
+<section class="section" data-nav-section="reflection" aria-labelledby="refl2-h">
+  <p class="section__index">11 · Internship reflection</p>
+
+  <div class="reveal">
+    <div class="reveal__lead">
+      <div class="stack stack--tight">
+        <p class="u-label">Question 02</p>
+        <h2 class="heading" id="refl2-h">What it<br>actually<br>was.</h2>
+      </div>
+    </div>
+
+    <div class="reveal__object">
+      <div class="card--outline">
+        <p class="u-label">The question</p>
+        <hr class="rule" style="margin: var(--spacing-14) 0;">
+        <div class="prose">
+          <p>What was the reality? How was it different from your expectations?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal__aside">
+      <p class="body">The reality was faster and far more collaborative than I anticipated.</p>
+
+      <div class="prose" style="margin-top: var(--spacing-18);">
+        <p>Within three weeks I was working on live projects with real deadlines and real cost
+          consequences, and my work was reviewed and used rather than filed away as practice.</p>
+
+        <p>Two things surprised me most. The first was how much of building services engineering is
+          coordination: a drainage route is rarely constrained by hydraulics alone, but by
+          structure, ceiling space, fire services and what the builder can practically install. The
+          second was how much judgement sits behind the standards. AS/NZS 3500 sets the floor, but
+          choosing between compliant options requires reasoning about buildability, maintenance and
+          cost that no table gives you.</p>
+
+        <p>The other departure from my expectations was how much room there was to improve the
+          process itself. I noticed the team repeating the same sizing calculations manually across
+          projects, so I built a hydraulic sizing tool that automated the calculation and checked it
+          against the standard. It was adopted by the team and is now used on live jobs. I have
+          since proposed, and am leading, the firm's internal onboarding modules to shorten ramp-up
+          time for new starters.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 13 · REFLECTION 03 ════════════════════════════════════════════════ -->
+
+<section class="section" data-nav-section="reflection" aria-labelledby="refl3-h">
+  <p class="section__index">12 · Internship reflection</p>
+
+  <div class="reveal">
+    <div class="reveal__lead">
+      <div class="stack stack--tight">
+        <p class="u-label">Question 03</p>
+        <h2 class="heading" id="refl3-h">Three<br>lessons.</h2>
+      </div>
+    </div>
+
+    <div class="reveal__object">
+      <div class="card--outline">
+        <p class="u-label">The question</p>
+        <hr class="rule" style="margin: var(--spacing-14) 0;">
+        <div class="prose">
+          <p>What lessons were the most important from your internship? Why were they
+            important?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal__aside">
+      <p class="body">Three lessons have stayed with me.</p>
+
+      <div class="prose" style="margin-top: var(--spacing-18);">
+        <p>The first is that engineering value comes from reducing uncertainty for other people. A
+          calculation is only useful when it lets a colleague, a client or a builder make a decision
+          confidently. That reframed how I document and communicate my work: the deliverable is not
+          the number, it is a number somebody else can rely on.</p>
+
+        <p>The second is that initiative is welcomed when it is grounded in a real problem. I did
+          not have permission to build the sizing tool. I had a problem I understood well enough to
+          solve, and I validated it against the standard before proposing it. That sequence —
+          understand, validate, then propose — is a repeatable approach rather than a one-off.</p>
+
+        <p>The third is professional judgement: knowing when to make a call and when to escalate.
+          Early on I over-escalated, taking questions to senior engineers that I had the information
+          to answer myself. Over time I learned to bring a recommendation rather than a question,
+          which respects their time and makes my own reasoning reviewable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 14 · REFLECTION 04 ════════════════════════════════════════════════ -->
+
+<section class="section" data-nav-section="reflection" aria-labelledby="refl4-h">
+  <p class="section__index">13 · Internship reflection</p>
+
+  <div class="reveal">
+    <div class="reveal__lead">
+      <div class="stack stack--tight">
+        <p class="u-label">Question 04</p>
+        <h2 class="heading" id="refl4-h">I build<br>things that<br>get used.</h2>
+      </div>
+    </div>
+
+    <div class="reveal__object">
+      <div class="card--outline">
+        <p class="u-label">The question</p>
+        <hr class="rule" style="margin: var(--spacing-14) 0;">
+        <div class="prose">
+          <p>After your workplace experience, what would you say your value proposition would be to
+            an employer? How can you demonstrate this?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal__aside">
+      <p class="body">I combine engineering fundamentals with programming.</p>
+
+      <div class="prose" style="margin-top: var(--spacing-18);">
+        <p>That is my value proposition: I can not only produce a compliant design, but automate and
+          standardise the process behind it. Most graduates arrive able to do one or the other. The
+          combination is where I am useful, because it turns a single correct answer into a method
+          the whole team can reuse.</p>
+
+        <p>I can demonstrate this concretely. The hydraulic sizing tool was identified, built and
+          validated by me, and is now part of how the design team works. The onboarding modules I
+          proposed are being used to bring new engineers up to speed. Outside the consultancy, I led
+          a four-person team through a PCB project from schematic to validated prototype, reaching
+          94% step-count accuracy over a 100-step test and passing design rule verification with
+          zero violations, and I rebuilt a robotic visual servoing system from MATLAB to native
+          Python to hold a stable 15–20 Hz control loop.</p>
+
+        <p>Each of those is verifiable, and each followed the same pattern: understand the problem
+          properly, build something that works, then prove that it works.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 15 · REFLECTION 05 ════════════════════════════════════════════════ -->
+
+<section class="section" data-nav-section="reflection" aria-labelledby="refl5-h">
+  <p class="section__index">14 · Internship reflection</p>
+
+  <div class="reveal">
+    <div class="reveal__lead">
+      <div class="stack stack--tight">
+        <p class="u-label">Question 05</p>
+        <h2 class="heading" id="refl5-h">Where I<br>am headed.</h2>
+      </div>
+    </div>
+
+    <div class="reveal__object">
+      <div class="card--outline">
+        <p class="u-label">The question</p>
+        <hr class="rule" style="margin: var(--spacing-14) 0;">
+        <div class="prose">
+          <p>How did your internship influence the type of role in which you are interested?</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal__aside">
+      <p class="body">It confirmed that my strength sits between engineering and systems.</p>
+
+      <div class="prose" style="margin-top: var(--spacing-18);">
+        <p>Before this role I assumed I would have to choose between design engineering and
+          software. The internship showed me they are not alternatives. The most valuable thing I
+          did there was not a calculation — it was noticing that a calculation was being repeated by
+          hand, and removing that repetition for everyone.</p>
+
+        <p>That has pushed me toward product design, automation and embedded systems, and toward
+          organisations where engineers are expected to improve the tools they work with rather than
+          simply operate them.</p>
+
+        <p>Hydraulic services is not where I expect to spend my career, but it is where the instinct
+          came from. Working to Australian Standards under review has taught me a rigour I intend to
+          carry into whatever I build next.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 16 · COVER LETTER ═════════════════════════════════════════════════ -->
+
+<section class="section" id="letter" data-nav-section="letter" aria-labelledby="letter-h">
+  <p class="section__index">15 · Cover letter</p>
+
+  <div class="reveal">
+    <div class="reveal__lead">
+      <div class="stack stack--tight">
+        <p class="u-label">Application</p>
+        <h2 class="heading" id="letter-h">Cover<br>letter.</h2>
+      </div>
+    </div>
+
+    <div class="reveal__object">
+      <div class="card--outline">
+        <p class="u-label">Status</p>
+        <hr class="rule" style="margin: var(--spacing-14) 0;">
+        <div class="prose">
+          <p>In preparation. Each selection criterion from the advertisement will be addressed
+            below using the STAR method — situation, task, action, result.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal__aside">
+      <p class="body">Addressing the selection criteria, one at a time.</p>
+
+      <div class="prose" style="margin-top: var(--spacing-18);">
+        <p>This section will carry the full letter: an opening naming the role and why it fits, a
+          STAR response to each criterion drawn from the work described elsewhere in this
+          portfolio, and a close.</p>
+
+        <p>The evidence it will draw on is already here — the hydraulic sizing tool I identified,
+          validated and saw adopted into live use; leading a four-person hardware team to a
+          validated prototype; and diagnosing and re-architecting a robotic control system to hold a
+          stable 15–20 Hz loop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ 17 · CONTACT ══════════════════════════════════════════════════════ -->
 
 <section class="section" id="contact" data-nav-section="contact" aria-labelledby="contact-h">
-  <p class="section__index">08 · Contact</p>
+  <p class="section__index">16 · Contact</p>
 
   <div class="reveal">
     <div class="reveal__lead">
